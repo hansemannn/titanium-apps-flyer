@@ -9,12 +9,22 @@
 
 package ti.appsflyer
 
+import android.annotation.SuppressLint
+import android.os.AsyncTask
+import android.widget.Toast
 import com.appsflyer.AppsFlyerLib
-import org.appcelerator.kroll.KrollModule
+import com.google.android.gms.ads.identifier.AdvertisingIdClient
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException
+import com.google.android.gms.common.GooglePlayServicesRepairableException
 import org.appcelerator.kroll.KrollDict
+import org.appcelerator.kroll.KrollFunction
+import org.appcelerator.kroll.KrollModule
+import org.appcelerator.kroll.KrollObject
 import org.appcelerator.kroll.annotations.Kroll
 import org.appcelerator.kroll.common.Log
 import org.appcelerator.titanium.TiApplication
+import java.io.IOException
+
 
 @Kroll.module(name = "TitaniumAppsFlyer", id = "ti.appsflyer")
 class TitaniumAppsFlyerModule: KrollModule() {
@@ -22,7 +32,10 @@ class TitaniumAppsFlyerModule: KrollModule() {
 	@Kroll.method
 	fun initialize(params: KrollDict) {
 		val devKey = params.getString("devKey")
+		val debugEnabled = params.optBoolean("debug", false)
+
 		AppsFlyerLib.getInstance().init(devKey, null, TiApplication.getInstance().applicationContext)
+		AppsFlyerLib.getInstance().setDebugLog(debugEnabled)
 	}
 
 	@Kroll.method
@@ -35,9 +48,41 @@ class TitaniumAppsFlyerModule: KrollModule() {
 		AppsFlyerLib.getInstance().logEvent(TiApplication.getInstance().applicationContext, eventName, parameters)
 	}
 
-	@Kroll.getProperty
-	fun idfa(): String {
-		Log.e("TiAppsFlyer", "The \"idfa\" property is iOS-only!")
-		return ""
+	@Kroll.method
+	fun fetchAdvertisingIdentifier(callback: KrollFunction) {
+		val task = TiAdvertisingIDTask(callback, getKrollObject())
+		task.execute()
+	}
+}
+
+class TiAdvertisingIDTask(private val callback: KrollFunction, private val krollObject: KrollObject) : AsyncTask<Void, Void, String>() {
+
+	override fun doInBackground(vararg params: Void?): String? {
+		var idInfo: AdvertisingIdClient.Info? = null
+		try {
+			idInfo = AdvertisingIdClient.getAdvertisingIdInfo(TiApplication.getInstance().applicationContext)
+		} catch (e: GooglePlayServicesNotAvailableException) {
+			e.printStackTrace()
+		} catch (e: GooglePlayServicesRepairableException) {
+			e.printStackTrace()
+		} catch (e: IOException) {
+			e.printStackTrace()
+		}
+		var advertId: String? = null
+		try {
+			advertId = idInfo!!.getId()
+		} catch (e: NullPointerException) {
+			e.printStackTrace()
+		}
+		return advertId
+	}
+
+	override fun onPostExecute(advertId: String?) {
+		super.onPostExecute(advertId)
+
+		val event = KrollDict()
+		event["idfa"] = advertId
+
+		callback.callAsync(krollObject, event)
 	}
 }

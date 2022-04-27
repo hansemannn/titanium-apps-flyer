@@ -37,9 +37,11 @@
   NSString *devKey = [TiUtils stringValue:args[@"devKey"]];
   NSString *appID = [TiUtils stringValue:args[@"appID"]];
   NSInteger authorizationTimeout = [TiUtils intValue:args[@"authorizationTimeout"] def:-1];
+  BOOL debugMode = [TiUtils boolValue:args[@"debug"] def:NO];
 
   [[AppsFlyerLib shared] setAppsFlyerDevKey:devKey];
   [[AppsFlyerLib shared] setAppleAppID:appID];
+  [[AppsFlyerLib shared] setIsDebug:debugMode];
 
   if (authorizationTimeout != -1) {
     [[AppsFlyerLib shared] waitForATTUserAuthorizationWithTimeoutInterval:authorizationTimeout];
@@ -64,9 +66,13 @@
   }
 }
 
-- (NSString *)idfa
+- (void)fetchAdvertisingIdentifier:(id)callback
 {
-  return [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+  ENSURE_SINGLE_ARG(callback, KrollCallback);
+
+  [callback call:@[@{
+    @"idfa": [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString]
+  }] thisObject:self];
 }
 
 - (void)logEvent:(id)args
