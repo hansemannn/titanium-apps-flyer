@@ -1,5 +1,7 @@
 # Titanium AppsFlyer SDK
 
+<img src="./.github/apps-flyer-logo.png" height="40" />
+
 Use the native AppsFlyer SDK's (iOS/Android) in Titanium!
 
 ## Requirements
