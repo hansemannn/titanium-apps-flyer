@@ -1,6 +1,6 @@
 # Titanium AppsFlyer SDK
 
-<img src="./.github/apps-flyer-logo.png" height="40" />
+<img src="./.github/apps-flyer-logo.png" height="80" />
 
 Use the native AppsFlyer SDK's (iOS/Android) in Titanium!
 
@@ -9,6 +9,7 @@ Use the native AppsFlyer SDK's (iOS/Android) in Titanium!
 - [x] iOS 12 or later
 - [x] Android 5 or later
 - [x] Titanium SDK 9.2.0 or later
+- [x] An AppsFlyer account
 
 ## APIs
 
