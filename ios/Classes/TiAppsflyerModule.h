@@ -11,4 +11,16 @@
 
 }
 
+- (void)initialize:(id)args;
+
+- (void)start:(id)unused;
+
+- (void)requestTrackingAuthorization:(id)callback;
+
+- (NSNumber *)trackingAuthorizationStatus;
+
+- (void)fetchAdvertisingIdentifier:(id)callback;
+
+- (void)logEvent:(id)args;
+
 @end

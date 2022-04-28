@@ -66,6 +66,15 @@
   }
 }
 
+- (NSNumber *)trackingAuthorizationStatus
+{
+  if (@available(iOS 14, *)) {
+    return @(ATTrackingManager.trackingAuthorizationStatus);
+  } else {
+    return @(-1);
+  }
+}
+
 - (void)fetchAdvertisingIdentifier:(id)callback
 {
   ENSURE_SINGLE_ARG(callback, KrollCallback);
