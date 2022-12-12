@@ -8,6 +8,7 @@
 #import "TiAppsflyerModule.h"
 #import "TiBase.h"
 #import "TiHost.h"
+#import "TiApp.h"
 #import "TiUtils.h"
 
 #import <AppsFlyerLib/AppsFlyerLib.h>
@@ -28,6 +29,18 @@
   return @"ti.appsflyer";
 }
 
+- (void)_configure
+{
+  [super _configure];
+  [[TiApp app] registerApplicationDelegate:self];
+}
+
+-(void)_destroy
+{
+  [super _destroy];
+  [[TiApp app] unregisterApplicationDelegate:self];
+}
+
 #pragma Public APIs
 
 - (void)initialize:(id)args
@@ -42,6 +55,7 @@
   [[AppsFlyerLib shared] setAppsFlyerDevKey:devKey];
   [[AppsFlyerLib shared] setAppleAppID:appID];
   [[AppsFlyerLib shared] setIsDebug:debugMode];
+  [[AppsFlyerLib shared] setUseUninstallSandbox:debugMode];
 
   if (authorizationTimeout != -1) {
     [[AppsFlyerLib shared] waitForATTUserAuthorizationWithTimeoutInterval:authorizationTimeout];
@@ -90,6 +104,11 @@
   NSDictionary *values = args[1];
 
   [[AppsFlyerLib shared] logEvent:eventName withValues:values];
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+  [[AppsFlyerLib shared] registerUninstall:deviceToken];
 }
 
 @end

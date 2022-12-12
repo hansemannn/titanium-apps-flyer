@@ -9,9 +9,7 @@
 
 package ti.appsflyer
 
-import android.annotation.SuppressLint
 import android.os.AsyncTask
-import android.widget.Toast
 import com.appsflyer.AppsFlyerLib
 import com.google.android.gms.ads.identifier.AdvertisingIdClient
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException
@@ -21,7 +19,6 @@ import org.appcelerator.kroll.KrollFunction
 import org.appcelerator.kroll.KrollModule
 import org.appcelerator.kroll.KrollObject
 import org.appcelerator.kroll.annotations.Kroll
-import org.appcelerator.kroll.common.Log
 import org.appcelerator.titanium.TiApplication
 import java.io.IOException
 
@@ -46,6 +43,24 @@ class TitaniumAppsFlyerModule: KrollModule() {
 	@Kroll.method
 	fun logEvent(eventName: String, parameters: KrollDict) {
 		AppsFlyerLib.getInstance().logEvent(TiApplication.getInstance().applicationContext, eventName, parameters)
+	}
+
+	@Kroll.method
+	fun logPurchase(parameters: KrollDict) {
+		AppsFlyerLib.getInstance().validateAndLogInAppPurchase(
+			TiApplication.getInstance().applicationContext,
+			parameters.getString("publicKey"),
+			parameters.getString("signature"),
+			parameters.getString("transactionId"),
+			parameters.getString("price"),
+			parameters.getString("currency"),
+			null
+		)
+	}
+
+	@Kroll.method
+	fun updateUninstallToken(pushToken: String) {
+		AppsFlyerLib.getInstance().updateServerUninstallToken(TiApplication.getInstance().applicationContext, pushToken)
 	}
 
 	@Kroll.method

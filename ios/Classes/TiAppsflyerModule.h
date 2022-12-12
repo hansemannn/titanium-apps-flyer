@@ -7,7 +7,7 @@
 
 #import "TiModule.h"
 
-@interface TiAppsflyerModule : TiModule {
+@interface TiAppsflyerModule : TiModule <UIApplicationDelegate> {
 
 }
 
