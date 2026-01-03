@@ -6,9 +6,9 @@ Use the native AppsFlyer SDK's (iOS/Android) in Titanium!
 
 ## Requirements
 
-- [x] iOS 12 or later
+- [x] iOS 15 or later
 - [x] Android 5 or later
-- [x] Titanium SDK 9.2.0 or later
+- [x] Titanium SDK 13.0.0 or later
 - [x] An AppsFlyer account
 
 ## APIs
