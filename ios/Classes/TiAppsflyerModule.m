@@ -2,7 +2,7 @@
  * Titanium AppsFlyer SDK
  *
  * Created by Hans Knöchel
- * Copyright (c) 2022 Hans Knöchel. All rights reserved.
+ * Copyright (c) 2022-present Hans Knöchel. All rights reserved.
  */
 
 #import "TiAppsflyerModule.h"
@@ -71,22 +71,14 @@
 {
   ENSURE_SINGLE_ARG(callback, KrollCallback);
 
-  if (@available(iOS 14, *)) {
-    [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
-      [callback call:@[@{ @"status": @(status) }] thisObject:self];
-    }];
-  } else {
-    NSLog(@"[ERROR] Do not call \"requestTrackingAuthorization\" on devices < iOS 14");
-  }
+  [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
+    [callback call:@[@{ @"status": @(status) }] thisObject:self];
+  }];
 }
 
 - (NSNumber *)trackingAuthorizationStatus
 {
-  if (@available(iOS 14, *)) {
-    return @(ATTrackingManager.trackingAuthorizationStatus);
-  } else {
-    return @(-1);
-  }
+  return @(ATTrackingManager.trackingAuthorizationStatus);
 }
 
 - (void)fetchAdvertisingIdentifier:(id)callback
