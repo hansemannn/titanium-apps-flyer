@@ -44,6 +44,8 @@
 	<string>15C65</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>10.15</string>
+	<key>MinimumOSVersion</key>
+	<string>100.0</string>
 	<key>UIDeviceFamily</key>
 	<array>
 		<integer>2</integer>

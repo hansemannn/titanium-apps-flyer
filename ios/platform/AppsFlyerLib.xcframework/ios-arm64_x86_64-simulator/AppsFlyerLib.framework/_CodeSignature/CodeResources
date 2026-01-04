@@ -70,7 +70,7 @@
 		</data>
 		<key>Modules/AppsFlyerLib.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		Uc/R6LejBdtYr96o8W3b6Vq933A=
+		MrjYTFmIEfkr1BWM9p8FUdLwaOo=
 		</data>
 		<key>Modules/AppsFlyerLib.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
@@ -90,7 +90,7 @@
 		</data>
 		<key>Modules/AppsFlyerLib.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		6kWYFwpAN2lDPpi47JwHSqKjfdk=
+		5C3CzrZMK1Y7vsYiJv8Au+UwYcg=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -272,11 +272,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Uc/R6LejBdtYr96o8W3b6Vq933A=
+			MrjYTFmIEfkr1BWM9p8FUdLwaOo=
 			</data>
 			<key>hash2</key>
 			<data>
-			n9VLlaqRoxHpte9rwhW7lMPDUtzf2DDeiy13oYe1OWM=
+			RXOJo34LwqNMXv+tQckyruLFUDbOoSqxhJJCSRpC4x0=
 			</data>
 		</dict>
 		<key>Modules/AppsFlyerLib.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
@@ -327,11 +327,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			6kWYFwpAN2lDPpi47JwHSqKjfdk=
+			5C3CzrZMK1Y7vsYiJv8Au+UwYcg=
 			</data>
 			<key>hash2</key>
 			<data>
-			1kYG5SXGjYInz0HukUGwSZhhJRxzgDvxpHGK4p910go=
+			+iYiC0qLAhfkg93e8vrNKDhutSJqrWYi0C+G+ZP4YF0=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

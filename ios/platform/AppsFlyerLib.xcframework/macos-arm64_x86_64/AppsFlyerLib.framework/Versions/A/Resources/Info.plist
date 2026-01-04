@@ -44,5 +44,7 @@
 	<string>15C65</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>10.13</string>
+	<key>MinimumOSVersion</key>
+	<string>100.0</string>
 </dict>
 </plist>
